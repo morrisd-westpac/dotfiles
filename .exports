@@ -1,0 +1,22 @@
+#!/bin/zsh
+
+# export CURL_CA_BUNDLE=~/Certs/zscaler.crt
+# export NODE_EXTRA_CA_CERTS=~/Certs/zscaler.crt
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:./node_modules/.bin:$PATH"
+export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+export CERTS_DIR="~/projects/ca-certificates"
+export NPM_CONFIG_CAFILE="$CERTS_DIR/westpac_sha2_ca.crt"
+export SSL_CERT_FILE="$CERTS_DIR/westpac_sha2_ca.crt"
+export CURL_CA_BUNDLE="$CERTS_DIR/westpac_sha2_ca.crt"
+export WESTPAC_CERTIFICATES="$CERTS_DIR"
+
+
+if command -v pyenv 1>/dev/null 2>&1; then
+	# No needed, as "init -" does everything (install pyenv into your shell as a shell function, enable shims and autocompletion)
+	# eval "$(pyenv init --path)"
+	eval "$(pyenv init -)"
+fi
+
+

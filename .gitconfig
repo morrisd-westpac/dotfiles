@@ -1,0 +1,9 @@
+[user]
+	name = Daniel Morris
+	email = daniel.morris@westpac.co.nz
+
+[credential]
+	helper = osxkeychain
+
+
+

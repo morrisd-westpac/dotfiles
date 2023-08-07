@@ -1,0 +1,124 @@
+#!/bin/zsh
+
+function set_proxy() {
+  export HTTP_PROXY=http://proxy.westpac.co.nz:8080
+  export http_proxy=${HTTP_PROXY}
+  export HTTPS_PROXY=http://proxy.westpac.co.nz:8080
+  export https_proxy=${HTTPS_PROXY}
+  export NO_PROXY=localhost,artifactory.westpac.co.nz,artifactory2.westpac.co.nz,*.westpac.co.nz,westpac.co.nz,127.0.0.1/24,192.168.0.0/16,172.16.0.0/12,10.0.0.0/8
+  export no_proxy=${NO_PROXY}
+
+  #set_npm_artifactory
+
+  echo "Proxy exports created"
+
+}
+
+function set_npmjs() {
+  npm config set registry https://registry.npmjs.org/
+}
+
+function set_npm_artifactory() {
+  npm config set registry https://artifactory2.westpac.co.nz/api/npm/npm-combined/
+}
+
+function hunt() {
+   grep -rnioE --exclude-dir=node_modules --exclude-dir=\*test\* --include \*.yml --include \*.ts --include \*.tsx --include \*.yaml --include \*.sql --include \*.js --include \*.cjs --include \*.mjs --include \*.asp\* --include \*.java --include \*.json --include \*.cs --exclude \*.bundle.js --exclude \*.test.\* "$1" . 
+}
+
+function huntoc() {
+  hunt ".{10}\w+\?\.\w+.{10}"
+}
+
+function findfiles() {
+  find . -print | grep -i $1
+}
+
+function syncdotfiles() {
+  curDir=$(pwd)
+  echo "Syncing dot files. Current Dir: $curDir"
+  . ~/projects/dotfiles/.bootstrap.sh
+  cd $curDir
+}
+
+function homekeys() {
+  setMonitorShortcuts "Phl 243S7" "Phl 243V7"
+}
+
+function workkeys() {
+  setMonitorShortcuts "T24V-20" "Len T24I-20"
+}
+
+function setMonitorShortcuts() {
+  unsetMonitorShortcuts
+  defaults write -globalDomain NSUserKeyEquivalents -dict-add "Move to Built-in Retina Display" "@~^\\U2193"
+  defaults write -globalDomain NSUserKeyEquivalents -dict-add "Move to $1" "@~^\\U2190"
+  defaults write -globalDomain NSUserKeyEquivalents -dict-add "Move to $2" "@~^\\U2192"
+  defaults write -globalDomain NSUserKeyEquivalents -dict-add "Zoom" "@~^m"
+}
+
+function unsetMonitorShortcuts() {
+  defaults delete -globalDomain NSUserKeyEquivalents
+}
+
+
+
+#=============================================
+# DEPRECATED / RETIRED
+#=============================================
+
+# function kill_proxy() {
+#   unset http_proxy
+#   unset https_proxy
+#   unset no_proxy
+#   unset HTTP_PROXY
+#   unset HTTPS_PROXY
+#   unset NO_PROXY
+  
+#   set_npmjs
+
+#   echo "Proxy exports killed"
+# }
+
+# function _setproxyauto() {
+
+#     echo "Setting $1 to AUTO"
+
+#     networksetup -setwebproxystate "$1" off
+#     networksetup -setsecurewebproxystate "$1" off
+#     networksetup -setautoproxyurl "$1" "http://pac.westpac.co.nz/proxy.pac"
+# }
+
+# function _setproxylocal() {
+
+#     echo "Setting $1 to LOCAL"
+
+#     networksetup -setautoproxystate "$1" off
+#     networksetup -setwebproxy "$1" 127.0.0.1 8080
+#     networksetup -setsecurewebproxy "$1" 127.0.0.1 8080
+#     networksetup -setwebproxystate "$1" on
+#     networksetup -setsecurewebproxystate "$1" on
+# }
+
+# function set_proxy_auto() {
+#   _setproxyauto "ThinkPad Lan"
+#   _setproxyauto "Wi-Fi"
+#   _setproxyauto "Westpac VPN"
+# }
+
+# function set_proxy_local() {
+#   _setproxylocal "ThinkPad Lan"
+#   _setproxylocal "Wi-Fi"
+#   _setproxylocal "Westpac VPN"
+# }
+
+# function _kill_wifi_proxy() {
+#   echo "Removing proxy settings from Wi-Fi connection"
+#   networksetup -setautoproxystate "$1" off
+# }
+
+# function _set_wifi_proxy() {
+#   echo "Reinstating proxy settings on Wi-Fi connection"
+#   networksetup -setautoproxystate "$1" on
+#   networksetup -setautoproxyurl "$1" "http://pac.westpac.co.nz/proxy.pac"
+# }

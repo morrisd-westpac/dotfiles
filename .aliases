@@ -1,0 +1,52 @@
+#!/bin/zsh
+
+
+# *** These seem to be defaults already in oh-my-zsh ***
+#alias ..="cd .."
+#alias ...="cd ../.."
+#alias ....="cd ../../.."
+#alias .....="cd ../../../.."
+#alias ~="cd ~" # `cd` is probably faster to type though
+#alias -- -="cd -"
+
+# Shortcuts
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias p="cd ~/projects"
+alias docs="cd ~/documents"
+
+# Project-specific
+alias wone="cd ~/projects/westpac-one/adapters"
+alias woneui="cd ~/projects/westpac-one-ui/packages/wone-ui"
+alias wonemock="cd ~/projects/westpac-one-ui/packages/wone-ui-mockserver"
+alias wic="cd ~/projects/westpac-investment-components"
+alias dotfiles="cd ~/projects/dotfiles"
+alias claims="cd ~/projects/claims/Claims/trunk"
+alias ifrs17="cd ~/projects/claims/Claims/trunk/tools/ifrs17dataexport/IFRS17DataExport/IFRS17DataExport"
+alias ss="cd ~/projects/westpac-2020"
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+
+alias textedit='open -a TextEdit'
+alias st='open -a "Sublime Text"'
+
+# the following requires symbolic link:
+#	sudo ln -s {repo_dir}/fix_mac_ipsec.sh /usr/local/bin/fix_mac_ipsec.sh
+
+#alias vpn_list="sudo fix_ipsec.sh list"
+#alias vpn_connect="sudo fix_ipsec.sh connect 'Westpac VPN'"
+#alias vpn_reset="sudo fix_ipsec.sh reset"
+
+alias start_mitm=". ~/Projects/mitmproxy-tools/start.sh"
+
+alias ssdocker="docker-compose up -d && docker-compose exec silverstripe bash"
+alias pac="~/.dotnet/tools/pac"
+
+#SILVERSTRIPE
+alias ssinityarn='sed -i -e "s#https://registry.yarnpkg.com/#https://artifactory2.westpac.co.nz:443/api/npm/npm-combined/#g" yarn.lock'
+alias ssyarn='yarn install --frozen-lockfile'
+

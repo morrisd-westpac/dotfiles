@@ -1,0 +1,6 @@
+# Load the shell dotfiles:
+source ~/.aliases;
+source ~/.exports;
+source ~/.functions;
+source ~/.wnzl_proxy;
+source ~/.nvmrc;
